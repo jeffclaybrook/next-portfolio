@@ -1,113 +1,150 @@
-import Image from "next/image";
+import Header from "@/components/Header"
+import Main from "@/components/Main"
+import Section from "@/components/Section"
+import HeroButton from "@/components/HeroButton"
+import Carousel from "@/components/Carousel"
+import Typewriter from "@/components/Typewriter"
+import OutlinedButton from "@/components/OutlinedButton"
+import Card from "@/components/Card"
+import Project from "@/components/Project"
+import Form from "@/components/Form"
+import Testimonial from "@/components/Testimonial"
+import Resume from "@/icons/Resume"
+import Github from "@/icons/Github"
+import { about, projects, skills, testimonials } from "@/data"
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Header>
+        <div className="flex flex-col items-start justify-center h-full text-start text-neutral-content">
+          <div className="px-4 lg:px-28">
+            <h1 className="text-5xl mb-2">
+              Hi, my name is{" "}
+              <strong className="text-primary">Jeff</strong>
+            </h1>
+            <p className="text-2xl mb-5">
+              and I&apos;m a{" "}
+              <Typewriter />
+            </p>
+            <div className="flex gap-4">
+              <HeroButton
+                href="https://jeffclaybrook.s3.amazonaws.com/resume.min.pdf"
+                className="btn btn-primary"
+                label="My Resume"
+                icon={<Resume />}
+              />
+              <HeroButton
+                href="https://github.com/jeffclaybrook"
+                className="btn"
+                label="My GitHub"
+                icon={<Github />}
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      </Header>
+      <Main>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+        <Section title="About" subtitle="A few things I&apos;ve been known to dabble in">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3.5">
+            {about.map((item, i) => (
+              <Card
+                key={i}
+                icon={item.icon}
+                title={item.title}
+              />
+            ))}
+          </div>
+          <div className="flex justify-center mt-16">
+            <OutlinedButton
+              label="More About Me"
+              href="/about"
+            />
+          </div>
+        </Section>
+
+        <Testimonial
+          quote={testimonials[0].quote}
+          name={testimonials[0].name}
+          title={testimonials[0].title}
+          image={testimonials[0].image}
         />
-      </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+        <Section title="Skills" subtitle="I&apos;m a Jeff of all trades">
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3.5">
+            {skills.map((item, i) => (
+              <Card
+                key={i}
+                icon={item.icon}
+                title={item.title}
+              />
+            ))}
+          </div>
+          <div className="flex justify-center mt-16">
+            <OutlinedButton
+              label="More Skills"
+              href="/skills"
+            />
+          </div>
+        </Section>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+        <Testimonial
+          quote={testimonials[1].quote}
+          name={testimonials[1].name}
+          title={testimonials[1].title}
+          image={testimonials[1].image}
+        />
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+        <Section title="Projects" subtitle="A few sample projects you can demo">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-3.5">
+            {projects.map((item, i) => (
+              <Project
+                key={i}
+                image={item.image}
+                title={item.title}
+                href={item.href}
+              />
+            ))}
+          </div>
+          <div className="flex justify-center mt-16">
+            <OutlinedButton
+              label="More Projects"
+              href="/projects"
+            />
+          </div>
+        </Section>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+        <Testimonial
+          quote={testimonials[2].quote}
+          name={testimonials[2].name}
+          title={testimonials[2].title}
+          image={testimonials[2].image}
+        />
+
+        <Section title="Artboards" subtitle="Getting the most out of every pixel">
+          <Carousel />
+          <div className="flex justify-center mt-16">
+            <OutlinedButton
+              label="More Artboards"
+              href="/artboards"
+            />
+          </div>
+        </Section>
+
+        <Testimonial
+          quote={testimonials[3].quote}
+          name={testimonials[3].name}
+          title={testimonials[3].title}
+          image={testimonials[3].image}
+        />
+        
+        <Section title="Contact" subtitle="Let&apos;s get in touch!">
+          <Form />
+        </Section>
+      </Main>
+    </>
+  )
 }
+
+export default Home
